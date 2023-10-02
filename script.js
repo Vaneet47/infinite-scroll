@@ -1,5 +1,6 @@
 const imageContainer = document.getElementById('image-container');
 const loader = document.getElementById('loader');
+const heading = document.getElementById('heading');
 
 let ready = false;
 let imagesLoaded = 0;
@@ -53,7 +54,13 @@ async function getPhotos() {
     const response = await fetch(apiUrl);
     photosArray = await response.json();
     displayPhotos();
-  } catch (error) {}
+  } catch (error) {
+    loader.hidden = true;
+    heading.hidden = true
+    const h2 = document.createElement('h2');
+    h2.textContent = 'Error with loading Images. Please try again later!';
+    imageContainer.appendChild(h2);
+  }
 }
 
 // window.innerHeight -> Total height of browser window
